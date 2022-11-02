@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>listar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let laptop of listaPC">
+    <ion-img [src]="laptop.foto" loading="lazy"></ion-img>
+    <ion-card-header>
+      <ion-card-title>
+        {{laptop.modelo}}
+      </ion-card-title>
+      <ion-card-subtitle>
+        {{laptop.marca}}
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>Descripcion: {{laptop.descripcion}}</ion-label>
+      <ion-chip>{{laptop.precio}}</ion-chip>
+    </ion-card-content>
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="cargarMas()">
+    <ion-infinite-scroll-content loadingText="cargando">
+
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

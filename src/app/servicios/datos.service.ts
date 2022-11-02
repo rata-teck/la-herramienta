@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Usuario} from './../modelos/usuario';
 import {Laptop, DetalleLaptop} from './../modelos/laptop';
 import {Venta} from './../modelos/venta';
-import {Observable} from 'rxjs';
+import {Observable,BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,14 @@ import {Observable} from 'rxjs';
 export class DatosService {
   private url : string = 'http://localhost:3000'; //la url base se concatena con la ruta requerida para hacer solicitudes al servidor.
 
+
   // los arrays son privados pero los metodos de busqueda retornan su contenido.
   private usuarios : Array<Usuario> = [];
   private laptops : Array<Laptop> = [];
   private ventas : Array<Venta> = [];
+  private compList = new BehaviorSubject<Array<Laptop>>([]);
+  public listarLaptop = this.compList.asObservable();
+  private paginaActual=1;
 
 
   private laptop : {
@@ -81,6 +85,27 @@ export class DatosService {
     });
     return this.venta;
   }
+
+  public listarLap(){
+    this.agentePerry.get<Array<Laptop>>(`${this.url}?_page=1`)
+    .subscribe(datos=>{
+      this.paginaActual = this.paginaActual +1;
+      this.compList.next(datos);
+
+    })
+  }
+
+  public obtenerMasLaptop(){
+    this.agentePerry.get<Array<Laptop>>(`${this.url}?_page=${this.paginaActual}`)
+    .subscribe(datos=>{
+      if(datos){
+        this.paginaActual = this.paginaActual +1;
+      this.compList.next(this.compList.getValue().concat(datos));
+      }
+
+    })
+  }
+
 
   // --- S O Y     A D M I N ---
 
