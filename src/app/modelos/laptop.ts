@@ -48,7 +48,6 @@ type Conexion = {
   version : string
 }
 export interface DetalleLaptop {
-  stock : number,
   cpu : Procesador,
   ram : Ram,
   disco : Disco,
@@ -56,7 +55,8 @@ export interface DetalleLaptop {
   grafica? : Grafica,
   bateria : Bateria,
   conectividad : Array<Conexion>,
-  audio : Audio
+  audio : Audio,
+  id? : number
 }
 export interface Laptop {
   marca : string,
@@ -65,6 +65,5 @@ export interface Laptop {
   descripcion : string,
   precio : number,
   stock : number,
-  especificaciones : DetalleLaptop,
   id? : number
 }

@@ -1,0 +1,18 @@
+{
+  "usuarios": [
+    {
+      "nombre": "Daniel",
+      "apellido": "Castro",
+      "edad": 19,
+      "correo": "danideveloper777@gmail.com",
+      "clave": "123456789",
+      "estado": 1,
+      "id": "raton_dani"
+    }
+  ],
+  "laptops": {
+    "listado": [],
+    "detalles": []
+  },
+  "ventas": []
+}

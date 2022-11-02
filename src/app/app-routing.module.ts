@@ -3,18 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path:'',
-    redirectTo:'login',
-    pathMatch:'full'
+    path: '',
+    loadChildren: () => import('./paginas/autentificador/autentificador.module').then( m => m.AutentificadorPageModule)
   },
   {
-    path:'login',
-    loadChildren:()=>import('./paginas/login/login.module').then(m =>m.LoginPageModule)
+    path: 'cli',
+    loadChildren: () => import('./paginas/cliente/cliente.module').then( m => m.ClientePageModule)
   },
   {
-    path:'registro',
-    loadChildren:()=>import('./paginas/registro/registro.module').then(m =>m.RegistroPageModule)
+    path: 'adm',
+    loadChildren: () => import('./paginas/admin/admin.module').then( m => m.AdminPageModule)
   }
+
 
 
 ];
