@@ -7,11 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: ClientePage
-  },  {
-    path: 'listar',
-    loadChildren: () => import('./listar/listar.module').then( m => m.ListarPageModule)
-  }
-
+  },
 ];
 
 @NgModule({

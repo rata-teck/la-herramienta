@@ -13,9 +13,9 @@ export class DatosService {
 
 
   // los arrays son privados pero los metodos de busqueda retornan su contenido.
-  private usuarios : Array<Usuario> = [];
-  private laptops : Array<Laptop> = [];
-  private ventas : Array<Venta> = [];
+  public usuarios : Array<Usuario> = [];
+  public laptops? : Array<Laptop>;
+  public ventas : Array<Venta> = [];
   private compList = new BehaviorSubject<Array<Laptop>>([]);
   public listarLaptop = this.compList.asObservable();
   private paginaActual=1;
@@ -47,11 +47,11 @@ export class DatosService {
     });
     return this.usuarios;
   }
-  public obtenerLaptops() : any{
+  public obtenerLaptops() : Array<Laptop>{
     this.laptops = [];
-    this.agentePerry.get<Laptop>(this.url+'/laptops/listado').subscribe(caosPandemia => { // cuenta un video de tiktok que bill gates creo el covid, personalmente no le creo.
+    this.agentePerry.get<Laptop>(this.url+'/listado-laptops').subscribe(caosPandemia => { // cuenta un video de tiktok que bill gates creo el covid, personalmente no le creo.
       this.laptops.push(caosPandemia);
-    });
+    })
     return this.laptops;
   }
   public obtenerRegistroVentas() : any{
@@ -62,11 +62,11 @@ export class DatosService {
     return this.ventas;
   }
 
-  public obtenerLaptop(id : number) : any{
-    this.agentePerry.get<Laptop>(this.url+'/laptops/listado/'+id).subscribe(data => {
+  public obtenerLaptop(id : number) :any{
+    this.agentePerry.get<Laptop>(this.url+'/listado-laptops/'+id).subscribe(data => {
       this.laptop.info = data;
     });
-    this.agentePerry.get<DetalleLaptop>(this.url+'/laptops/detalles/'+id).subscribe(data => {
+    this.agentePerry.get<DetalleLaptop>(this.url+'/detalles-laptop/'+id).subscribe(data => {
       this.laptop.detalles = data;
     });
     return this.laptop;
@@ -111,11 +111,13 @@ export class DatosService {
 
   // Registra la info basica y las specs por separado
   private registrarDetalleLaptop(detalles : DetalleLaptop) : Observable<any>{
-    return this.agentePerry.post(this.url+'/laptops/detalles', detalles, this.info);
+    return this.agentePerry.post(this.url+'/detalles-laptop', detalles, this.info);
   }
   public registrarLaptop(laptop : Laptop, detalles : DetalleLaptop) : Observable<any>{
-    this.registrarDetalleLaptop(detalles);
-    return this.agentePerry.post(this.url+'/laptops/listado', laptop, this.info);
+    this.registrarDetalleLaptop(detalles).subscribe(data => {
+      console.log(data.id);
+    })
+    return this.agentePerry.post(this.url+'/listado-laptops', laptop, this.info);
   }
 
 
@@ -128,28 +130,28 @@ export class DatosService {
 
 
   private eliminarDetalleLaptop(id : number) : void{
-    this.agentePerry.delete(this.url+'/laptops/detalles/'+id);
+    this.agentePerry.delete(this.url+'/detalles-laptop/'+id);
   }
   public eliminarLaptop(id : number) : void{
     this.eliminarDetalleLaptop(id);
-    this.agentePerry.delete(this.url+'/laptops/listado/'+id);
+    this.agentePerry.delete(this.url+'/listado-laptops/'+id);
   }
 
 
   private modificarDetalleLaptop(detalles : DetalleLaptop) : Observable<any>{
-    return this.agentePerry.put(this.url+'/laptops/detalles/'+detalles.id, detalles, this.info);
+    return this.agentePerry.put(this.url+'/detalles-laptop/'+detalles.id, detalles, this.info);
   }
   public modificarLaptop(laptop : Laptop, detalles : DetalleLaptop) : Observable<any>{
     this.modificarDetalleLaptop(detalles);
-    return this.agentePerry.put(this.url+'/laptops/listado/'+laptop.id, laptop, this.info);
+    return this.agentePerry.put(this.url+'/listado-laptops/'+laptop.id, laptop, this.info);
   }
 
 
   public actualizarPrecioLaptop(id : number, precio : number) : Observable<any>{
-    return this.agentePerry.patch(this.url+'/laptops/listado/'+id, {"precio" : precio}, this.info);
+    return this.agentePerry.patch(this.url+'/listado-laptops/'+id, {"precio" : precio}, this.info);
   }
   public actualizarStockLaptop(id : number, stock : number) : Observable<any>{
-    return this.agentePerry.patch(this.url+'/laptops/listado/'+id, {"stock" : stock}, this.info);
+    return this.agentePerry.patch(this.url+'/listado-laptops/'+id, {"stock" : stock}, this.info);
   }
 
 

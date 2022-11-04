@@ -7,11 +7,11 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/autentificador/autentificador.module').then( m => m.AutentificadorPageModule)
   },
   {
-    path: 'cli',
+    path: 'cli/:id',
     loadChildren: () => import('./paginas/cliente/cliente.module').then( m => m.ClientePageModule)
   },
   {
-    path: 'adm',
+    path: 'adm/:id',
     loadChildren: () => import('./paginas/admin/admin.module').then( m => m.AdminPageModule)
   }
 

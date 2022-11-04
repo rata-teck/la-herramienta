@@ -12,4 +12,10 @@ export class AdminPage implements OnInit {
   ngOnInit() {
   }
 
+  public modo : string = 'inicio';
+
+  public cambiarModo(nuevo : string) : void{
+    this.modo = nuevo;
+  }
+
 }

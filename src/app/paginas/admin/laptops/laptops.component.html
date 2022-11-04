@@ -1,0 +1,88 @@
+<br><br>
+<div *ngIf="modo == 'listado'">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="8">
+        <ion-title>Listado de laptops</ion-title>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button (click)="crearFormularioRegistro()">Nueva laptop</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-item *ngFor="let x of laptops" (click)="verLaptop(x.id)">
+    <ion-label>{{x.marca}}</ion-label>
+  </ion-item>
+</div>
+<div *ngIf="modo == 'registro'">
+  <div align="center">
+    <ion-title>Nueva laptop</ion-title>
+  </div><br>
+  <ion-text>Información básica</ion-text>
+  <form [formGroup]="formularioRegistroBasico">
+    <ion-item>
+      <ion-label position="floating">Marca</ion-label>
+      <ion-input formControlName="marca"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Modelo</ion-label>
+      <ion-input formControlName="modelo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input (change)="leerArchivo($event)" formControlName="foto" type="file"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-input formControlName="descripcion"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input formControlName="precio" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Stock</ion-label>
+      <ion-input formControlName="stock" type="number"></ion-input>
+    </ion-item>
+  </form><br>
+  <ion-text>Especificaciones</ion-text>
+  <form [formGroup]="formularioRegistroDetalles">
+    <ion-item>
+      <ion-label position="floating">Procesador</ion-label>
+      <ion-input formControlName="cpu"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Memoria</ion-label>
+      <ion-input formControlName="ram"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Disco duro</ion-label>
+      <ion-input formControlName="disco"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Pantalla</ion-label>
+      <ion-input formControlName="pantalla"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Tarjeta gráfica</ion-label>
+      <ion-input formControlName="grafica"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Batería</ion-label>
+      <ion-input formControlName="bateria"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Conectividad</ion-label>
+      <ion-input formControlName="conectividad"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Audio</ion-label>
+      <ion-input formControlName="audio"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Software incluído</ion-label>
+      <ion-input formControlName="software_incluido"></ion-input>
+    </ion-item>
+    <ion-label *ngIf="formularioRegistroBasico.invalid || formularioRegistroDetalles.invalid" style="color: red;">Por favor ingresar todos los datos solicitados</ion-label>
+  </form>
+  <ion-button *ngIf="formularioRegistroBasico.valid && formularioRegistroDetalles.valid" type="submit" (click)="registrarLaptop()">Guardar</ion-button>
+</div>

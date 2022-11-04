@@ -47,8 +47,8 @@ export class RegistroComponent implements OnInit {
     }
     this.puente.registrarUsuario(this.usuario).subscribe(data => {
       this.portero.navigate(['registro']);
-    });
-    this.cambiarModo();
+    })
+    this.m1.emit();
   }
   public cambiarModo() : void{
     this.m1.emit();

@@ -12,7 +12,7 @@ import {LoginComponent} from './login/login.component';
 
 import {DatosService} from './../../servicios/datos.service';
 import {HttpClientModule} from '@angular/common/http';
-import {RouterModule} from '@angular/router';
+import {RouterModule, RouterLink} from '@angular/router';
 
 @NgModule({
   imports: [
@@ -22,7 +22,8 @@ import {RouterModule} from '@angular/router';
     IonicModule,
     AutentificadorPageRoutingModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    RouterLink
   ],
   declarations: [
     AutentificadorPage,

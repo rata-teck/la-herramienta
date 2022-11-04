@@ -1,9 +1,40 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>admin</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<ion-menu contentId="menu-admin">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Listados</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-item (click)="cambiarModo('inicio')">
+      <ion-label>Inicio</ion-label>
+    </ion-item>
+    <ion-item (click)="cambiarModo('laptops')">
+      <ion-label>Laptops</ion-label>
+    </ion-item>
+    <ion-item (click)="cambiarModo('ventas')">
+      <ion-label>Ventas</ion-label>
+    </ion-item>
+    <ion-item (click)="cambiarModo('usuarios')">
+      <ion-label>Usuarios</ion-label>
+    </ion-item><br>
+    <ion-item href="/">
+      <ion-label>Cerrar sesión</ion-label>
+    </ion-item>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="menu-admin">
+  <ion-header>
+    <ion-toolbar>
+      <ion-button slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-button>
+      <ion-title>Portal administrativo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <app-inicio *ngIf="modo == 'inicio'"></app-inicio>
+    <app-laptops *ngIf="modo == 'laptops'"></app-laptops>
+    <app-usuarios *ngIf="modo == 'usuarios'"></app-usuarios>
+    <app-ventas *ngIf="modo == 'ventas'"></app-ventas>
+  </ion-content>
+</div>
