@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   public m2 = new EventEmitter();
   formLogin: FormGroup;
 
+  private usuario? : Usuario;
+
   constructor(
     public fb : FormBuilder,
     private portero : DatosService,
@@ -27,14 +29,16 @@ export class LoginComponent implements OnInit {
      }
   public ingresar() : any{
     var datos = this.formLogin.value;
-    var usuario : Usuario = this.portero.obtenerUsuario(datos.nombre_usuario);
-    if(usuario.clave == datos.clave){
-      if(usuario.estado == 1){
-        this.ruta.navigateByUrl("/cli/"+usuario.id);
+    this.portero.obtenerUsuario(datos.nombre_usuario).subscribe(data => {
+      this.usuario = data;
+    })
+    if(this.usuario.clave == datos.clave){
+      if(this.usuario.estado == 1){
+        this.ruta.navigateByUrl("/cli/"+this.usuario.id);
       }
       else{
-        if(usuario.estado == 2){
-          this.ruta.navigateByUrl("/adm/"+usuario.id);
+        if(this.usuario.estado == 2){
+          this.ruta.navigateByUrl("/adm/"+this.usuario.id);
         }
       }
     }

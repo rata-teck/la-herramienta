@@ -11,7 +11,7 @@
     </ion-row>
   </ion-grid>
   <ion-item *ngFor="let x of laptops" (click)="verLaptop(x.id)">
-    <ion-label>{{x.marca}}</ion-label>
+    <ion-label>{{x.marca}} {{x.modelo}} - ${{x.precio}}</ion-label>
   </ion-item>
 </div>
 <div *ngIf="modo == 'registro'">
@@ -85,4 +85,111 @@
     <ion-label *ngIf="formularioRegistroBasico.invalid || formularioRegistroDetalles.invalid" style="color: red;">Por favor ingresar todos los datos solicitados</ion-label>
   </form>
   <ion-button *ngIf="formularioRegistroBasico.valid && formularioRegistroDetalles.valid" type="submit" (click)="registrarLaptop()">Guardar</ion-button>
+</div>
+
+<div *ngIf="modo == 'detalles'">
+  <img [src]="laptop.foto" width="100%"><br>
+  <div align="center">
+    <ion-title>{{laptop.marca}} {{laptop.modelo}}</ion-title>
+  </div><br><br><br>
+  <ion-label>Información general</ion-label><br>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>Descripción</ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-text>{{laptop.descripcion}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>Precio</ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-text>$ {{laptop.precio}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>Stock</ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-text>{{laptop.stock}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Número de producto</ion-col>
+      <ion-col size="8">N_{{laptop.id}}</ion-col>
+    </ion-row>
+  </ion-grid><br><br>
+  <ion-label>Especificaciones</ion-label><br>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>Procesador</ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-text>{{detalles.cpu}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>Memoria</ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-text>{{detalles.ram}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>Disco duro</ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-text>{{detalles.disco}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>Pantalla</ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-text>{{detalles.pantalla}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>Gráficos</ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-text>{{detalles.grafica}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>Batería</ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-text>{{detalles.bateria}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>Conectividad</ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-text>{{detalles.conectividad}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>Sonido</ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-text>{{detalles.audio}}</ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid><br><br>
+  <ion-button expand="block">Editar</ion-button><br>
+  <ion-button expand="block">Eliminar</ion-button><br><br>
 </div>

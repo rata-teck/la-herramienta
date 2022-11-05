@@ -40,54 +40,33 @@ export class DatosService {
     public agentePerry : HttpClient // la mision de perry el ormitorrinco es meterse en los datos del dr doof.
   ) { }
 
-  public obtenerRegistroUsuarios() : any{
-    this.usuarios = [];
-    this.agentePerry.get<Usuario>(this.url+'/usuarios/clientes').subscribe(metroEnHoraPunta => { // pais que tenga metro sabe el contexto xd.
-      this.usuarios.push(metroEnHoraPunta);
-    });
-    return this.usuarios;
+  public obtenerRegistroUsuarios() : Observable<Usuario[]>{
+    return this.agentePerry.get<Usuario[]>(this.url+'/usuarios');
   }
-  public obtenerLaptops() : Array<Laptop>{
-    this.laptops = [];
-    this.agentePerry.get<Laptop>(this.url+'/listado-laptops').subscribe(caosPandemia => { // cuenta un video de tiktok que bill gates creo el covid, personalmente no le creo.
-      this.laptops.push(caosPandemia);
-    })
-    return this.laptops;
+  public obtenerLaptops() : Observable<Laptop[]>{
+    return this.agentePerry.get<Laptop[]>(this.url+'/listado-laptops');
   }
-  public obtenerRegistroVentas() : any{
-    this.ventas = [];
-    this.agentePerry.get<Venta>(this.url+'/ventas').subscribe(donCangrejo => { // como hara bob esponja para ser tan feliz?
-      this.ventas.push(donCangrejo);
-    });
-    return this.ventas;
+  public obtenerRegistroVentas() : Observable<Venta[]>{
+    return this.agentePerry.get<Venta[]>(this.url+'/ventas');
   }
 
-  public obtenerLaptop(id : number) :any{
-    this.agentePerry.get<Laptop>(this.url+'/listado-laptops/'+id).subscribe(data => {
-      this.laptop.info = data;
-    });
-    this.agentePerry.get<DetalleLaptop>(this.url+'/detalles-laptop/'+id).subscribe(data => {
-      this.laptop.detalles = data;
-    });
-    return this.laptop;
+  public obtenerLaptop(id : number) : Observable<Laptop>{
+    return this.agentePerry.get<Laptop>(this.url+'/listado-laptops/'+id);
+  }
+  public obtenerDetalleLaptop(id : number) : Observable<DetalleLaptop>{
+    return this.agentePerry.get<DetalleLaptop>(this.url+'/detalles-laptop/'+id);
   }
 
-  public obtenerUsuario(id : string) : any{
-    this.agentePerry.get<Usuario>(this.url+'/usuarios/'+id).subscribe(data => {
-      this.usuario = data;
-    });
-    return this.usuario;
+  public obtenerUsuario(id : string) : Observable<Usuario>{
+    return this.agentePerry.get<Usuario>(this.url+'/usuarios/'+id);
   }
 
-  public obtenerVenta(id : number) : any{
-    this.agentePerry.get<Venta>(this.url+'/ventas/'+id).subscribe(data => {
-      this.venta = data;
-    });
-    return this.venta;
+  public obtenerVenta(id : number) : Observable<Venta>{
+    return this.agentePerry.get<Venta>(this.url+'/ventas/'+id);
   }
 
   public listarLap(){
-    this.agentePerry.get<Array<Laptop>>(`${this.url}?_page=1`)
+    this.agentePerry.get<Array<Laptop>>(`${this.url+'/listado-laptops'}?_page=1`)
     .subscribe(datos=>{
       this.paginaActual = this.paginaActual +1;
       this.compList.next(datos);
@@ -96,7 +75,7 @@ export class DatosService {
   }
 
   public obtenerMasLaptop(){
-    this.agentePerry.get<Array<Laptop>>(`${this.url}?_page=${this.paginaActual}`)
+    this.agentePerry.get<Array<Laptop>>(`${this.url+'/listado-laptops'}?_page=${this.paginaActual}`)
     .subscribe(datos=>{
       if(datos){
         this.paginaActual = this.paginaActual +1;

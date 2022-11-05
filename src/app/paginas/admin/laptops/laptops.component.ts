@@ -19,8 +19,8 @@ export class LaptopsComponent implements OnInit {
 
   public modo : string = 'listado';
   public laptops? : Array<Laptop>;
-  public laptop! : Laptop;
-  public detalles! : DetalleLaptop;
+  public laptop? : Laptop;
+  public detalles? : DetalleLaptop;
   public idLaptop! : number;
 
   constructor(
@@ -74,13 +74,18 @@ export class LaptopsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.laptops = this.datos.obtenerLaptops();
+    this.datos.obtenerLaptops().subscribe(data =>{
+      this.laptops = data;
+    })
   }
 
   public verLaptop(id : number) : void{
-    const lap = this.datos.obtenerLaptop(id);
-    this.laptop = lap.info;
-    this.detalles = lap.detalles;
+    this.datos.obtenerLaptop(id).subscribe(data => {
+      this.laptop = data;
+    })
+    this.datos.obtenerDetalleLaptop(id).subscribe(data => {
+      this.detalles = data;
+    })
     this.modo = 'detalles';
   }
 
