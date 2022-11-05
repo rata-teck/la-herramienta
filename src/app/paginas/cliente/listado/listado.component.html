@@ -5,19 +5,27 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let laptop of listaPC">
-    <ion-img [src]="laptop.foto" loading="lazy"></ion-img>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="abrirCarrito()" >
+      <div class="cart-length">{{ carritoCount | async }}</div>
+      <ion-icon name="cart" class="cart-icon"></ion-icon>
+    </ion-fab-button>
+
+  </ion-fab>
+
+  <ion-card *ngFor="let l of listaPC">
+    <ion-img [src]="l.foto" loading="lazy"></ion-img>
     <ion-card-header>
       <ion-card-title>
-        {{laptop.modelo}}
+        {{l.modelo}}
       </ion-card-title>
       <ion-card-subtitle>
-        {{laptop.marca}}
+        {{l.marca}}
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-label>Descripcion: {{laptop.descripcion}}</ion-label>
-      <ion-chip>{{laptop.precio}}</ion-chip>
+      <ion-label>Descripcion: {{l.descripcion}}</ion-label>
+      <ion-chip>{{l.precio | currency:'CLP'}}</ion-chip>
     </ion-card-content>
   </ion-card>
   <ion-infinite-scroll (ionInfinite)="cargarMas()">

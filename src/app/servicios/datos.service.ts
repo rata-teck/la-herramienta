@@ -19,6 +19,8 @@ export class DatosService {
   private compList = new BehaviorSubject<Array<Laptop>>([]);
   public listarLaptop = this.compList.asObservable();
   private paginaActual=1;
+  private carrito=[];
+  private carritoCount= new BehaviorSubject(0);
 
 
   private laptop : {
@@ -84,7 +86,50 @@ export class DatosService {
 
     })
   }
+  //----CARRITO-----
+  getLaptop(){
+    return this.laptops;
+  }
+  getCarrito(){
+    return this.carrito;
+  }
+  getCarritoCount(){
+    return this.carritoCount;
+  }
 
+  addLaptop(laptops){
+    let agregado = false;
+    for(let l of this.carrito){
+      if(l.id=== this.laptops){
+        l.stock +=1;
+        agregado=true;
+        break;
+      }
+    }
+    if(!agregado){
+      this.carrito.push(laptops);
+    }
+    this.carritoCount.next(this.carritoCount.value+1);
+  }
+  decreaseLaptop(laptops){
+    for(let[index,l]of this.carrito.entries()){
+      if(l.id === laptops){
+        l.stock-=1;
+        if(l.precio == 0){
+          this.carrito.splice(index,1)
+        }
+      }
+    }
+    this.carritoCount.next(this.carritoCount.value -1);
+  }
+  removeLaptop(laptops){
+    for(let[index,l]of this.carrito.entries()){
+      if(l.id===laptops){
+        this.carritoCount.next(this.carritoCount.value -l.stock);
+        this.carrito.splice(index,1);
+      }
+    }
+  }
 
   // --- S O Y     A D M I N ---
 
