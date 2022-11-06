@@ -32,7 +32,7 @@ export class CarritoComponent implements OnInit {
   }
 
   getTotal(){
-    return this.carrito.reduce((i,j)=>i+j.precio*j.stock,0);
+    return this.carrito.reduce((i,j)=>i+j.precio*j.cantidad,0);
   }
   cerrar(){
     this.modalCtrl.dismiss();

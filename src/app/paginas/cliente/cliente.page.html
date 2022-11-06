@@ -1,9 +1,37 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>cliente</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<ion-menu contentId="menu-cliente">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Bienvenid@, {{usuario.nombre}} {{usuario.apellido}}!</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-item (click)="cambiarModo('inicio')">
+      <ion-label>Inicio</ion-label>
+    </ion-item>
+    <ion-item (click)="cambiarModo('listado')">
+      <ion-label>Todas las laptops</ion-label>
+    </ion-item>
+    <ion-item (click)="cambiarModo('carrito')">
+      <ion-label>Carrito de compras</ion-label>
+    </ion-item><br>
+    <ion-item href="/">
+      <ion-label>Cerrar sesión</ion-label>
+    </ion-item>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="menu-cliente">
+  <ion-header>
+    <ion-toolbar>
+      <ion-button  slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-button>
+      <ion-title>La Herramienta - Venta de notebooks</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <app-inicio *ngIf="modo == 'inicio'" (verLaptop)="mostrarLaptop($event)"></app-inicio>
+    <app-listado *ngIf="modo == 'listado'"></app-listado>
+    <app-detalles *ngIf="modo == 'detalles'" [idLaptop]="idLaptop" (elegido)="redireccionarProducto($event)"></app-detalles>
+    <app-carrito *ngIf="modo == 'carrito'" [accion]="accionCarrito", [idLap]="idLaptop" [cantidad]="cantidad"></app-carrito>
+  </ion-content>
+</div>

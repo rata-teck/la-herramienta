@@ -89,4 +89,12 @@ export class LaptopsComponent implements OnInit {
     this.modo = 'detalles';
   }
 
+  //delete(laptop:Laptop):void{
+    //this.datos.eliminarLaptop(laptop.id).subscribe{
+      //res=>this.datos.obtenerLaptops().subscribe(
+        //response=>this.laptops=response
+      //)
+    //}
+  //}
+
 }

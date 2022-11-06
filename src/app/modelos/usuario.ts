@@ -1,7 +1,5 @@
-import {Venta} from './venta';
-import {Laptop} from './laptop';
 type Aaaa = {
-  laptop : Laptop,
+  idLaptop : number,
   unidades : number
 }
 export interface Usuario {
@@ -11,7 +9,6 @@ export interface Usuario {
   correo : string,
   clave : string,
   foto? : string,
-  compras? : Array<Venta>,
   estado : number,
   carrito? : Array<Aaaa>,
   id : string

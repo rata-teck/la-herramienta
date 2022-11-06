@@ -17,5 +17,6 @@ export interface Laptop {
   descripcion : string,
   precio : number,
   stock : number,
+  cantidad: number,
   id? : number
 }

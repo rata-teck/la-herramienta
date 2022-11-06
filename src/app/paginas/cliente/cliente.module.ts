@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -14,8 +14,8 @@ import {InicioComponent} from './inicio/inicio.component';
 import {ListadoComponent} from './listado/listado.component';
 import {DetallesComponent} from './detalles/detalles.component';
 import {CarritoComponent} from './carrito/carrito.component';
-import {ComprarComponent} from './comprar/comprar.component';
-import {SeguimientoComponent} from './seguimiento/seguimiento.component';
+
+import {RouterModule, RouterLink} from '@angular/router';
 
 @NgModule({
   imports: [
@@ -23,16 +23,17 @@ import {SeguimientoComponent} from './seguimiento/seguimiento.component';
     FormsModule,
     IonicModule,
     ClientePageRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
+    RouterLink,
+    ReactiveFormsModule
   ],
   declarations: [
     ClientePage,
     InicioComponent,
     ListadoComponent,
     DetallesComponent,
-    CarritoComponent,
-    ComprarComponent,
-    SeguimientoComponent
+    CarritoComponent
   ],
   providers: [
     DatosService

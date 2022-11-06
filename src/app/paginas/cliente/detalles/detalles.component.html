@@ -1,3 +1,107 @@
-<p>
-  detalles works!
-</p>
+<br><br>
+<ion-card class="carta">
+  <img [src]="laptop.foto" style="width: 100%;"><br>
+  <ion-card-content>
+  <ion-card-subtitle>{{laptop.marca}}</ion-card-subtitle>
+  <ion-card-title>{{laptop.modelo}}</ion-card-title><br>
+  <div align="center">
+    <h1 style="width: 100%;">$ {{laptop.precio}}</h1>
+  </div><br>
+  <form [formGroup]="cuantosQuiere">
+    <ion-item>
+      <ion-label>Cantidad:</ion-label>
+      <ion-input formControlName="cantidad" type="number" max="{{laptop.stock}}"></ion-input>
+    </ion-item>
+  </form>
+  <ion-button expand="block" (click)="addAlCarrito(laptop)">Añadir al carrito</ion-button><br>
+  </ion-card-content>
+</ion-card><br>
+<ion-card class="carta">
+  <ion-card-header>
+    <ion-card-title>Descripción</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-text>{{laptop.descripcion}}</ion-text>
+  </ion-card-content>
+</ion-card><br>
+<ion-card class="carta">
+  <ion-card-header>
+    <ion-card-title>Especificaciones</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <ion-card-subtitle>Procesador</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="8">
+          <ion-text>{{detalles.cpu}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <ion-card-subtitle>Memoria</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="8">
+          <ion-text>{{detalles.ram}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <ion-card-subtitle>Disco</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="8">
+          <ion-text>{{detalles.disco}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <ion-card-subtitle>Pantalla</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="8">
+          <ion-text>{{detalles.pantalla}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <ion-card-subtitle>Tarjeta gráfica</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="8">
+          <ion-text>{{detalles.grafica}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <ion-card-subtitle>Batería</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="8">
+          <ion-text>{{detalles.bateria}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <ion-card-subtitle>Conectividad</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="8">
+          <ion-text>{{detalles.conectividad}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <ion-card-subtitle>Sonido</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="8">
+          <ion-text>{{detalles.audio}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <ion-card-subtitle>Software incluído</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="8">
+          <ion-text>{{detalles.software_incluido}}</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card><br><br>

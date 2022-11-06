@@ -17,7 +17,7 @@
               </ion-button>
             </ion-col>
             <ion-col size="1" class="ion-align-self-center">
-              {{l.stock}}
+              {{l.cantidad}}
             </ion-col>
             <ion-col size="2" class="ion-align-self-center">
               <ion-button color="medium" fill="clear" (click)="increaseCarritoI(l)">
@@ -35,7 +35,7 @@
               <b>{{l.marca}}_{{l.modelo}}</b>
             </ion-col>
             <ion-col size="3" class="ion-text-end">
-              {{l.stock * l.precio | currency:'CLP'}}
+              {{l.cantidad * l.precio }}
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -47,7 +47,7 @@
               Total:
             </ion-col>
             <ion-col size="3" class="ion-text-end">
-              {{getTotal() | currency:'CLP'}}
+              {{getTotal() }}
             </ion-col>
           </ion-row>
         </ion-grid>

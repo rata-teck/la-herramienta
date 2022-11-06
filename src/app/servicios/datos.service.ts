@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Usuario} from './../modelos/usuario';
 import {Laptop, DetalleLaptop} from './../modelos/laptop';
-import {Venta} from './../modelos/venta';
 import {Observable,BehaviorSubject} from 'rxjs';
 
 @Injectable({
@@ -15,7 +14,6 @@ export class DatosService {
   // los arrays son privados pero los metodos de busqueda retornan su contenido.
   public usuarios : Array<Usuario> = [];
   public laptops? : Array<Laptop>;
-  public ventas : Array<Venta> = [];
   private compList = new BehaviorSubject<Array<Laptop>>([]);
   public listarLaptop = this.compList.asObservable();
   private paginaActual=1;
@@ -29,7 +27,7 @@ export class DatosService {
   }
 
   private usuario? : Usuario;
-  private venta? : Venta;
+
 
   // tercer argumento del metodo post, hecho variable para mas placer xd.
   private info = {
@@ -48,9 +46,6 @@ export class DatosService {
   public obtenerLaptops() : Observable<Laptop[]>{
     return this.agentePerry.get<Laptop[]>(this.url+'/listado-laptops');
   }
-  public obtenerRegistroVentas() : Observable<Venta[]>{
-    return this.agentePerry.get<Venta[]>(this.url+'/ventas');
-  }
 
   public obtenerLaptop(id : number) : Observable<Laptop>{
     return this.agentePerry.get<Laptop>(this.url+'/listado-laptops/'+id);
@@ -61,10 +56,6 @@ export class DatosService {
 
   public obtenerUsuario(id : string) : Observable<Usuario>{
     return this.agentePerry.get<Usuario>(this.url+'/usuarios/'+id);
-  }
-
-  public obtenerVenta(id : number) : Observable<Venta>{
-    return this.agentePerry.get<Venta>(this.url+'/ventas/'+id);
   }
 
   public listarLap(){
@@ -86,7 +77,7 @@ export class DatosService {
 
     })
   }
-  //----CARRITO-----
+  //--CARRITO---
   getLaptop(){
     return this.laptops;
   }
@@ -101,7 +92,7 @@ export class DatosService {
     let agregado = false;
     for(let l of this.carrito){
       if(l.id=== this.laptops){
-        l.stock +=1;
+        l.cantidad +=1;
         agregado=true;
         break;
       }
@@ -114,7 +105,7 @@ export class DatosService {
   decreaseLaptop(laptops){
     for(let[index,l]of this.carrito.entries()){
       if(l.id === laptops){
-        l.stock-=1;
+        l.cantidad-=1;
         if(l.precio == 0){
           this.carrito.splice(index,1)
         }
@@ -125,11 +116,12 @@ export class DatosService {
   removeLaptop(laptops){
     for(let[index,l]of this.carrito.entries()){
       if(l.id===laptops){
-        this.carritoCount.next(this.carritoCount.value -l.stock);
+        this.carritoCount.next(this.carritoCount.value -l.cantida);
         this.carrito.splice(index,1);
       }
     }
   }
+
 
   // --- S O Y     A D M I N ---
 
@@ -178,11 +170,7 @@ export class DatosService {
     return this.agentePerry.patch(this.url+'/listado-laptops/'+id, {"stock" : stock}, this.info);
   }
 
-
-  public modificarVenta(venta : Venta) : Observable<any>{
-    return this.agentePerry.put(this.url+'/ventas/'+venta.id, venta, this.info);
-  }
-  public eliminarVenta(id : number) : void{
-    this.agentePerry.delete(this.url+'/ventas/'+id);
+  public modificarUsuario(usuario : Usuario) : Observable<any>{
+    return this.agentePerry.put(this.url+'/usuarios/'+usuario.id, usuario, this.info);
   }
 }

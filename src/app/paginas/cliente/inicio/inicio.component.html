@@ -1,3 +1,30 @@
-<p>
-  inicio works!
-</p>
+<br><br>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="abrirCarrito()" #carrito>
+    <div class="cart-length">{{ carritoCount | async }}</div>
+    <ion-icon name="cart" class="cart-icon"></ion-icon>
+  </ion-fab-button>
+
+</ion-fab>
+<img src="/assets/portada.png" width="100%"><br>
+<ion-title>Encuentra tu nueva herramienta de trabajo!</ion-title><br><br><br>
+<div align="center">
+  <ion-label>Nuestras mejores opciones</ion-label>
+</div><br>
+<ion-card class="carta" *ngFor="let x of laptops" (click)="verDetalles(x.id)">
+  <img [src]="x.foto" style="width: 100%;"><br>
+  <ion-card-content>
+  <ion-card-subtitle>{{x.marca}}</ion-card-subtitle>
+  <ion-card-title>{{x.modelo}}</ion-card-title><br>
+  <div align="center">
+    <h1 style="width: 100%;">$ {{x.precio}}</h1>
+  </div>
+  </ion-card-content>
+</ion-card>
+<ion-infinite-scroll (ionInfinite)="cargarMas()">
+  <ion-infinite-scroll-content loadingText="cargando">
+
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+
